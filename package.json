@@ -1,7 +1,7 @@
 {
-  "name": "data-gen",
+  "name": "randoc",
   "version": "0.0.1",
-  "main": "data-gen.js",
+  "main": "randoc.js",
   "author": "rouanw",
   "license": "MIT",
   "scripts": {

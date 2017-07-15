@@ -1,5 +1,5 @@
 var test = require('tape');
-var dataGen = require('./data-gen');
+var randoc = require('./randoc');
 
 test('random document', function (t) {
   t.plan(6);
@@ -23,7 +23,7 @@ test('random document', function (t) {
     }],
   };
 
-  const randomDocument = dataGen.randomDocument(schema);
+  const randomDocument = randoc.randomDocument(schema);
 
   t.ok(randomDocument.name.first);
   t.ok(randomDocument.name.last);
@@ -37,7 +37,7 @@ test('random document', function (t) {
 
 test('random documents', function (t) {
   t.plan(1);
-  const randomDocuments = dataGen.randomDocuments({}, 10);
+  const randomDocuments = randoc.randomDocuments({}, 10);
   t.equal(randomDocuments.length, 10);
   t.end();
 });
