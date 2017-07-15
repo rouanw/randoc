@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const chance = new require('chance')();
 
-const recordOfSpecialType = (fieldName, schema) => {
+const specialRandomDocument = (fieldName, schema) => {
   if (schema._exists && !chance.bool({ likelihood: schema._exists }) ) {
     return {};
   }
@@ -14,14 +14,14 @@ const recordOfSpecialType = (fieldName, schema) => {
   throw new Error(`Unsupported special type: ${schema._type}`);
 };
 
-const exampleRecord = (fieldSchema) => _.reduce(fieldSchema, (record, type, fieldName) => {
+const randomDocument = (fieldSchema) => _.reduce(fieldSchema, (record, type, fieldName) => {
   if (Array.isArray(type)) {
-    return Object.assign({}, record, { [fieldName]: [].concat(type.map(exampleRecord)) });
+    return Object.assign({}, record, { [fieldName]: [].concat(type.map(randomDocument)) });
   }
   if (typeof type === 'object' && type !== null) {
     return (type._type)
-      ? Object.assign({}, record, recordOfSpecialType(fieldName, type))
-      : Object.assign({}, record, { [fieldName]: exampleRecord(type) });
+      ? Object.assign({}, record, specialRandomDocument(fieldName, type))
+      : Object.assign({}, record, { [fieldName]: randomDocument(type) });
   }
   if (chance[type]) {
     return Object.assign({}, record, { [fieldName]: chance[type]() });
@@ -30,9 +30,9 @@ const exampleRecord = (fieldSchema) => _.reduce(fieldSchema, (record, type, fiel
   return Object.assign({}, record, { [fieldName]: chance.string() });
 }, {});
 
-const exampleRecords = (schema, n) => _.times(n, () => exampleRecord(schema));
+const randomDocuments = (schema, n) => _.times(n, () => randomDocument(schema));
 
 module.exports = {
-  exampleRecord,
-  exampleRecords,
+  randomDocument,
+  randomDocuments,
 };

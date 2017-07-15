@@ -1,7 +1,7 @@
 var test = require('tape');
 var dataGen = require('./data-gen');
 
-test('example record', function (t) {
+test('random document', function (t) {
   t.plan(6);
 
   const schema = {
@@ -23,21 +23,21 @@ test('example record', function (t) {
     }],
   };
 
-  const exampleRecord = dataGen.exampleRecord(schema);
+  const randomDocument = dataGen.randomDocument(schema);
 
-  t.ok(exampleRecord.name.first);
-  t.ok(exampleRecord.name.last);
-  t.equal(typeof exampleRecord.vegan, 'boolean');
-  t.ok(schema.jobTitle.options.includes(exampleRecord.jobTitle));
-  t.ok(exampleRecord.friends[0].name.first);
-  t.ok(exampleRecord.friends[0].name.last);
+  t.ok(randomDocument.name.first);
+  t.ok(randomDocument.name.last);
+  t.equal(typeof randomDocument.vegan, 'boolean');
+  t.ok(schema.jobTitle.options.includes(randomDocument.jobTitle));
+  t.ok(randomDocument.friends[0].name.first);
+  t.ok(randomDocument.friends[0].name.last);
 
   t.end();
 });
 
-test('example records', function (t) {
+test('random documents', function (t) {
   t.plan(1);
-  const exampleRecords = dataGen.exampleRecords({}, 10);
-  t.equal(exampleRecords.length, 10);
+  const randomDocuments = dataGen.randomDocuments({}, 10);
+  t.equal(randomDocuments.length, 10);
   t.end();
 });
