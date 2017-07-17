@@ -4,6 +4,10 @@
   "main": "randoc.js",
   "author": "rouanw",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rouanw/randoc"
+  },
   "scripts": {
     "test": "node test"
   },
