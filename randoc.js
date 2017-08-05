@@ -30,7 +30,7 @@ const randomDocument = (fieldSchema) => _.reduce(fieldSchema, (record, type, fie
   return Object.assign({}, record, { [fieldName]: chance.string() });
 }, {});
 
-const randomDocuments = (schema, n) => _.times(n, () => randomDocument(schema));
+const randomDocuments = (schema, n) => [...Array(n)].map(() => randomDocument(schema));
 
 module.exports = {
   randomDocument,

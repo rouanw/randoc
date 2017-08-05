@@ -12,8 +12,7 @@
     "test": "node test"
   },
   "dependencies": {
-    "chance": "^1.0.10",
-    "lodash": "^4.17.4"
+    "chance": "^1.0.10"
   },
   "devDependencies": {
     "tape": "^4.7.0"
