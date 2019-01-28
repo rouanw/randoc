@@ -1,6 +1,11 @@
 # Randoc
 
-Generates random documents based on a simple schema using [Chance.js](http://chancejs.com/) functions.
+> Generates random documents based on a simple schema using [Chance.js](http://chancejs.com/) functions.
+
+[![npm version](https://badge.fury.io/js/randoc.svg)](https://badge.fury.io/js/randoc)
+[![Build Status](https://travis-ci.org/rouanw/randoc.svg?branch=master)](https://travis-ci.org/rouanw/randoc)
+![Dependency Status](https://david-dm.org/rouanw/randoc.svg)
+![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)
 
 Handy for creating test / stub data.
 
