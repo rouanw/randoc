@@ -27,14 +27,14 @@
     "stub"
   ],
   "engines": {
-    "npm": ">=6.1.0"
+    "npm": ">=6.1.0",
+    "node": ">=8.0.0"
   },
   "scripts": {
     "test": "node test"
   },
   "dependencies": {
-    "chance": "^1.0.10",
-    "lodash": "^4.17.11"
+    "chance": "^1.0.10"
   },
   "devDependencies": {
     "tape": "^4.7.0"

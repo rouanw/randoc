@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const chance = new require('chance')();
 
 const specialRandomDocument = (fieldName, schema) => {
@@ -14,7 +13,7 @@ const specialRandomDocument = (fieldName, schema) => {
   throw new Error(`Unsupported special type: ${schema._type}`);
 };
 
-const randomDocument = (fieldSchema) => _.reduce(fieldSchema, (record, type, fieldName) => {
+const randomDocument = (fieldSchema) => Object.entries(fieldSchema).reduce((record, [fieldName, type]) => {
   if (Array.isArray(type)) {
     return Object.assign({}, record, { [fieldName]: [].concat(type.map(randomDocument)) });
   }
