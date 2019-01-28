@@ -3,6 +3,8 @@ sudo: false
 node_js:
   - "node"
   - "6"
+  - "8"
+  - "10"
 deploy:
   provider: npm
   email: Rouan.Wilsenach@tesglobal.com
