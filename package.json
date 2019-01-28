@@ -1,12 +1,33 @@
 {
   "name": "randoc",
+  "description": "Generates random documents based on a simple schema for your test or stub data",
   "version": "0.0.6",
   "main": "randoc.js",
-  "author": "rouanw",
+  "author": {
+    "name": "Rouan Wilsenach",
+    "url": "https://rouanw.github.io/"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/rouanw/randoc"
+  },
+  "homepage": "https://rouanw.github.io/randoc/",
+  "bugs": {
+    "url": "https://github.com/rouanw/randoc/issues"
+  },
+  "keywords": [
+    "random",
+    "document",
+    "chance",
+    "test",
+    "tests",
+    "data",
+    "generate",
+    "stub"
+  ],
+  "engines": {
+    "npm": ">=6.1.0"
   },
   "scripts": {
     "test": "node test"
