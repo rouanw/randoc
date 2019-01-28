@@ -109,6 +109,18 @@ const doc = randomDocument(schema);
 // { status: 'available' }
 ```
 
+#### Properties that may not exist
+
+The example below has a 70% chance of including a `salary` property:
+
+```js
+const schema = { name: 'name', status: { _type: 'enum', _exists: 70, options: ['new', 'available', 'expired'] } };
+const doc = randomDocument(schema);
+//
+```
+
+Note that `_exists` is currently only available for "special" types.
+
 ### A more complete example
 
 Here's an example schema that showcases some of the available functionality:
