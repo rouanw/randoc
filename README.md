@@ -101,7 +101,7 @@ These are types not offered directly by Chance.js functions.
 
 #### Enum
 
-You may want tp pick a value from a list of options:
+You may want to pick a value from a list of options:
 
 ```js
 const schema = { status: { _type: 'enum', options: ['new', 'available', 'expired'] } };
@@ -111,7 +111,7 @@ const doc = randomDocument(schema);
 
 #### Properties that may not exist
 
-The example below has a 70% chance of including a `salary` property:
+The example below has a 70% chance of including a `status` property:
 
 ```js
 const schema = { name: 'name', status: { _type: 'enum', _exists: 70, options: ['new', 'available', 'expired'] } };
