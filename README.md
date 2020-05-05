@@ -126,7 +126,15 @@ const doc = randomDocument(schema);
 //
 ```
 
-Note that `_exists` is currently only available for "special" types.
+Here is an example for an array of Chance.js generated cities which has a 30% chance of being empty or otherwise a length of three.
+
+```js
+const schema = { cities: { _type: 'city', _exists: 30, _arrayOf: 3 } };
+const doc = randomDocument(schema);
+//
+```
+
+Note that `_exists` is currently only available for "special" types and arrays.
 
 ### A more complete example
 

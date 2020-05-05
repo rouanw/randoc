@@ -2,7 +2,9 @@ const chance = new require('chance')();
 
 const specialRandomDocument = (fieldName, schema) => {
   if (schema._exists && !chance.bool({ likelihood: schema._exists }) ) {
-    return {};
+    return {
+      ...(schema._arrayOf && { [fieldName]: [] })
+    };
   }
   if (schema._arrayOf !== undefined && chance[schema._type]) {
     const returnArray = []
