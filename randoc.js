@@ -4,6 +4,13 @@ const specialRandomDocument = (fieldName, schema) => {
   if (schema._exists && !chance.bool({ likelihood: schema._exists }) ) {
     return {};
   }
+  if (schema._arrayOf !== undefined && chance[schema._type]) {
+    const returnArray = []
+    for (let i = 1; i <= schema._arrayOf; i++) {
+      returnArray.push(chance[schema._type](schema.args))
+    }
+    return { [fieldName]: returnArray };
+  }
   if (schema._type === 'enum') {
     return { [fieldName]: chance.pickone(schema.options) };
   }

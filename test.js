@@ -2,7 +2,7 @@ var test = require('tape');
 var randoc = require('./randoc');
 
 test('random document', function (t) {
-  t.plan(6);
+  t.plan(7);
 
   const schema = {
     name: {
@@ -21,6 +21,11 @@ test('random document', function (t) {
         last: 'last',
       },
     }],
+    profession: {
+      _type: 'profession',
+      args: { rank: false },
+      _arrayOf: 3,
+    },
   };
 
   const randomDocument = randoc.randomDocument(schema);
@@ -31,6 +36,7 @@ test('random document', function (t) {
   t.ok(schema.jobTitle.options.includes(randomDocument.jobTitle));
   t.ok(randomDocument.friends[0].name.first);
   t.ok(randomDocument.friends[0].name.last);
+  t.equal(randomDocument.profession.length, 3);
 
   t.end();
 });

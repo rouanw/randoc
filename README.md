@@ -85,15 +85,22 @@ const doc = randomDocument(schema);
 // { isMonday: false, weather: { rain: true, snow: true } }
 ```
 
-### Arrays
+### Arrays of Chance.js types
+
+```js
+const schema = { profession: { _type: 'profession', args: { rank: false }, _arrayOf: 3 } },
+};
+const doc = randomDocument(schema);
+// { profession: ['Software Developer', 'Recreational Director' 'Landscape Architect'] }
+```
+
+### Arrays objects
 
 ```js
 const schema = { days: [ { isMonday: 'bool' } ] };
 const doc = randomDocument(schema);
 // { days: [ { isMonday: false } ] }
 ```
-
-`randoc` does not currently support multiple items. Open a [Pull Request](https://github.com/rouanw/randoc/pulls) if you're eager.
 
 ### Special types
 
