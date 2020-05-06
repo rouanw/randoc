@@ -5,18 +5,23 @@ const defaultForUnknownField = ({ fieldName, type, array = false }) => {
   return { [fieldName]: array ? [chance.string()] : chance.string() };
 }
 
+const arrayField = ({ _type, _array, args }, fieldName) => {
+  if (_array.empty && !chance.bool({ likelihood: _array.empty }) ) {
+    return { [fieldName]: [] }
+  }
+  if (chance[_type]) {
+    return { [fieldName]: [...new Array(_array.length || 1)].map(_ => chance[_type](args)) };
+  } else {
+    return defaultForUnknownField({ fieldName, type: _type, array: true });
+  }
+}
+
 const specialRandomDocument = (fieldName, schema) => {
   if (schema._exists && !chance.bool({ likelihood: schema._exists }) ) {
-    return {
-      ...(schema._arrayOf && { [fieldName]: [] })
-    };
+    return {};
   }
-  if (schema._arrayOf !== undefined) {
-    if (chance[schema._type]) {
-      return { [fieldName]: [...new Array(schema._arrayOf)].map(_ => chance[schema._type](schema.args)) };
-    } else {
-      return defaultForUnknownField({ fieldName, type: schema._type, array: true });
-    }
+  if (schema._array) {
+    return arrayField(schema, fieldName);
   }
   if (schema._type === 'enum') {
     return { [fieldName]: chance.pickone(schema.options) };

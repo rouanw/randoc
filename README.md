@@ -87,11 +87,26 @@ const doc = randomDocument(schema);
 
 ### Arrays of Chance.js types
 
+By default, the array will have a length of 1.
+
 ```js
-const schema = { profession: { _type: 'profession', args: { rank: false }, _arrayOf: 3 } },
+const schema = { professions: { _type: 'profession', _array: true } },
 };
 const doc = randomDocument(schema);
-// { profession: ['Software Developer', 'Recreational Director' 'Landscape Architect'] }
+// { professions: ['Teacher'] }
+```
+
+You can specify the length of the array and the likelihood of it being empty.
+The example below has a 30% chance of including an array of length 3.
+Otherwise it will be an empty array.
+
+```js
+const schema = { professions: { _type: 'profession', _array: { empty: 30, length: 3 } } },
+};
+const doc = randomDocument(schema);
+// { professions: ['Software Developer', 'Recreational Director' 'Landscape Architect'] }
+// or
+// { professions: [] }
 ```
 
 ### Arrays objects

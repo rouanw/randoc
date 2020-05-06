@@ -2,7 +2,7 @@ var test = require('tape');
 var randoc = require('./randoc');
 
 test('random document', function (t) {
-  t.plan(10);
+  t.plan(13);
 
   const schema = {
     name: {
@@ -21,13 +21,15 @@ test('random document', function (t) {
         last: 'last',
       },
     }],
+    cities: { _type: 'city', _array: true },
+    emailAddresses: { _type: 'email', _array: { empty: 50 } },
     profession: {
       _type: 'profession',
       args: { rank: false },
-      _arrayOf: 3,
+      _array: { length: 3 },
     },
     favouriteDinosaur: 'dinosaur',
-    foodAllergies: { _type: 'allergies', _arrayOf: 2 },
+    foodAllergies: { _type: 'allergies', _array: true },
   };
 
   const randomDocument = randoc.randomDocument(schema);
@@ -38,6 +40,9 @@ test('random document', function (t) {
   t.ok(schema.jobTitle.options.includes(randomDocument.jobTitle));
   t.ok(randomDocument.friends[0].name.first);
   t.ok(randomDocument.friends[0].name.last);
+  t.equal(randomDocument.cities.length, 1);
+  t.equal(typeof randomDocument.emailAddresses.length, 'number');
+  t.ok(randomDocument.emailAddresses.length <= 1);
   t.equal(randomDocument.profession.length, 3);
   t.equal(typeof randomDocument.favouriteDinosaur, 'string');
   t.equal(randomDocument.foodAllergies.length, 1);
