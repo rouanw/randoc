@@ -2,7 +2,7 @@ var test = require('tape');
 var randoc = require('./randoc');
 
 test('random document', function (t) {
-  t.plan(7);
+  t.plan(10);
 
   const schema = {
     name: {
@@ -26,6 +26,8 @@ test('random document', function (t) {
       args: { rank: false },
       _arrayOf: 3,
     },
+    favouriteDinosaur: 'dinosaur',
+    foodAllergies: { _type: 'allergies', _arrayOf: 2 },
   };
 
   const randomDocument = randoc.randomDocument(schema);
@@ -37,6 +39,9 @@ test('random document', function (t) {
   t.ok(randomDocument.friends[0].name.first);
   t.ok(randomDocument.friends[0].name.last);
   t.equal(randomDocument.profession.length, 3);
+  t.equal(typeof randomDocument.favouriteDinosaur, 'string');
+  t.equal(randomDocument.foodAllergies.length, 1);
+  t.equal(typeof randomDocument.foodAllergies[0], 'string');
 
   t.end();
 });
