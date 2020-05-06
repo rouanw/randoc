@@ -7,11 +7,7 @@ const specialRandomDocument = (fieldName, schema) => {
     };
   }
   if (schema._arrayOf !== undefined && chance[schema._type]) {
-    const returnArray = []
-    for (let i = 1; i <= schema._arrayOf; i++) {
-      returnArray.push(chance[schema._type](schema.args))
-    }
-    return { [fieldName]: returnArray };
+    return { [fieldName]: [...new Array(schema._arrayOf)].map(_ => chance[schema._type](schema.args)) };
   }
   if (schema._type === 'enum') {
     return { [fieldName]: chance.pickone(schema.options) };
