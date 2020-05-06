@@ -9,7 +9,7 @@ const getChance = ({ fieldName, type, args, array }) => {
 }
 
 const arrayField = ({ _type, _array, args }, fieldName) => {
-  if (_array.empty && !chance.bool({ likelihood: _array.empty }) ) {
+  if (_array.empty && chance.bool({ likelihood: _array.empty }) ) {
     return { [fieldName]: [] }
   }
   return { [fieldName]: [...new Array(_array.length || 1)].map(_ => getChance({ fieldName, type: _type, args, array: true })) };

@@ -97,16 +97,16 @@ const doc = randomDocument(schema);
 ```
 
 You can specify the length of the array and the likelihood of it being empty.
-The example below has a 30% chance of including an array of length 3.
-Otherwise it will be an empty array.
+The example below has a 30% chance of including an empty array.
+Otherwise it will be an array of length 3.
 
 ```js
 const schema = { professions: { _type: 'profession', _array: { empty: 30, length: 3 } } },
 };
 const doc = randomDocument(schema);
-// { professions: ['Software Developer', 'Recreational Director' 'Landscape Architect'] }
-// or
 // { professions: [] }
+// or
+// { professions: ['Software Developer', 'Recreational Director' 'Landscape Architect'] }
 ```
 
 ### Arrays objects
