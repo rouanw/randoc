@@ -85,15 +85,37 @@ const doc = randomDocument(schema);
 // { isMonday: false, weather: { rain: true, snow: true } }
 ```
 
-### Arrays
+### Arrays of Chance.js types
+
+By default, the array will have a length of 1.
+
+```js
+const schema = { professions: { _type: 'profession', _array: true } },
+};
+const doc = randomDocument(schema);
+// { professions: ['Teacher'] }
+```
+
+You can specify the length of the array and the likelihood of it being empty.
+The example below has a 30% chance of including an empty array.
+Otherwise it will be an array of length 3.
+
+```js
+const schema = { professions: { _type: 'profession', _array: { empty: 30, length: 3 } } },
+};
+const doc = randomDocument(schema);
+// { professions: [] }
+// or
+// { professions: ['Software Developer', 'Recreational Director' 'Landscape Architect'] }
+```
+
+### Arrays objects
 
 ```js
 const schema = { days: [ { isMonday: 'bool' } ] };
 const doc = randomDocument(schema);
 // { days: [ { isMonday: false } ] }
 ```
-
-`randoc` does not currently support multiple items. Open a [Pull Request](https://github.com/rouanw/randoc/pulls) if you're eager.
 
 ### Special types
 
@@ -119,7 +141,17 @@ const doc = randomDocument(schema);
 //
 ```
 
-Note that `_exists` is currently only available for "special" types.
+Here is an example for an array of Chance.js generated cities which has a 30% chance of being empty or otherwise a length of three.
+
+```js
+const schema = { cities: { _type: 'city', _exists: 30, _arrayOf: 3 } };
+const doc = randomDocument(schema);
+// cities: []
+// or
+// cities: ['Johannesburg', 'London', 'Singapore']
+```
+
+Note that `_exists` is currently only available for "special" types and arrays.
 
 ### A more complete example
 
