@@ -109,12 +109,31 @@ const doc = randomDocument(schema);
 // { professions: ['Software Developer', 'Recreational Director' 'Landscape Architect'] }
 ```
 
-### Arrays objects
+### Arrays of objects
+
+If provided with an array, `randoc` will create a random document for each element.
 
 ```js
 const schema = { days: [ { isMonday: 'bool' } ] };
 const doc = randomDocument(schema);
 // { days: [ { isMonday: false } ] }
+```
+
+```js
+const schema = { days: new Array(10).fill({ isMonday: 'bool' }) };
+const doc = randomDocument(schema);
+/* { days:
+   [ { isMonday: false },
+     { isMonday: true },
+     { isMonday: true },
+     { isMonday: false },
+     { isMonday: false },
+     { isMonday: false },
+     { isMonday: true },
+     { isMonday: false },
+     { isMonday: false },
+     { isMonday: true } ] }
+  */
 ```
 
 ### Special types
