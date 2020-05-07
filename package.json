@@ -1,7 +1,7 @@
 {
   "name": "randoc",
   "description": "Generates random documents based on a simple schema for your test or stub data",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "randoc.js",
   "author": {
     "name": "Rouan Wilsenach",
