@@ -153,6 +153,10 @@ const doc = randomDocument(schema);
 
 Note that `_exists` is currently only available for "special" types and arrays.
 
+### Unknown types
+
+If there is no Chance.js function for the `_type` you've provided, `randoc` will default to using [`chance.string()`](https://chancejs.com/basics/string.html).
+
 ### A more complete example
 
 Here's an example schema that showcases some of the available functionality:

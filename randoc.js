@@ -1,18 +1,12 @@
 const chance = new require('chance')();
 
-const getChance = ({ fieldName, type, args, array }) => {
-  if (!chance[type]) {
-    console.log(`No Chance.js generator found for field ${fieldName} of type ${type}. Using string instead`);
-    return array ? chance.string() : { [fieldName]: chance.string() };
-  }
-  return array ? chance[type](args) : { [fieldName]: chance[type](args) };
-}
+const getChance = ({ type, args }) => chance[type] ? chance[type](args) : chance.string();
 
 const arrayField = ({ _type, _array, args }, fieldName) => {
   if (_array.empty && chance.bool({ likelihood: _array.empty }) ) {
     return { [fieldName]: [] }
   }
-  return { [fieldName]: [...new Array(_array.length || 1)].map(_ => getChance({ fieldName, type: _type, args, array: true })) };
+  return { [fieldName]: [...new Array(_array.length || 1)].map(_ => getChance({ type: _type, args })) };
 }
 
 const specialRandomDocument = (fieldName, schema) => {
@@ -25,7 +19,7 @@ const specialRandomDocument = (fieldName, schema) => {
   if (schema._type === 'enum') {
     return { [fieldName]: chance.pickone(schema.options) };
   }
-  return getChance({ fieldName, type: schema._type, args: schema.args });
+  return { [fieldName]: getChance({ type: schema._type, args: schema.args }) };
 };
 
 const randomDocument = (fieldSchema) => Object.entries(fieldSchema).reduce((record, [fieldName, type]) => {
@@ -37,7 +31,7 @@ const randomDocument = (fieldSchema) => Object.entries(fieldSchema).reduce((reco
       ? Object.assign({}, record, specialRandomDocument(fieldName, type))
       : Object.assign({}, record, { [fieldName]: randomDocument(type) });
   }
-  return Object.assign({}, record, getChance({ fieldName, type }));
+  return Object.assign({}, record, { [fieldName]: getChance({ fieldName, type }) });
 }, {});
 
 const randomDocuments = (schema, n) => [...Array(n)].map(() => randomDocument(schema));
