@@ -34,7 +34,7 @@
     "test": "node test"
   },
   "dependencies": {
-    "chance": "^1.0.10"
+    "chance": "^1.1.7"
   },
   "devDependencies": {
     "tape": "^4.7.0"
